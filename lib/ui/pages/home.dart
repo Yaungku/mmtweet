@@ -144,16 +144,24 @@ class _HomePageState extends State<HomePage> {
                 itemCount: transitionlist.length,
                 itemBuilder: (context, index) {
                   Transition transition = transitionlist[index];
-                  return ListTile(
-                    title: Text(
-                      transition.memo,
-                      style: TextStyle(fontSize: 20.0),
-                    ),
-                    trailing: Text(
-                      timeago.format(
-                        DateTime.parse(transition.created),
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                          transition.memo,
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                        trailing: Text(
+                          timeago.format(
+                            DateTime.parse(transition.created),
+                          ),
+                        ),
                       ),
-                    ),
+                      Divider(
+                        color: Colors.black,
+                        height: 1,
+                      )
+                    ],
                   );
                 },
               ),

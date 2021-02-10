@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (phone == phoneController.text &&
                             password == passowordController.text) {
                           Navigator.pushReplacementNamed(
-                              context, HomePage.routeName);
+                              context, MainTab.routeName);
                         } else {
                           showToast("Phone or Password are incorrect");
                         }
@@ -104,12 +104,12 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () =>
                       Navigator.pushNamed(context, RegisterPage.routeName),
                 ),
-                FlatButton(
-                  child: Text("Home"),
-                  //color: Color.fromARGB(255, 240, 108, 155),
-                  onPressed: () => Navigator.pushReplacementNamed(
-                      context, MainTab.routeName),
-                ),
+                // FlatButton(
+                //   child: Text("Home"),
+                //   //color: Color.fromARGB(255, 240, 108, 155),
+                //   onPressed: () => Navigator.pushReplacementNamed(
+                //       context, MainTab.routeName),
+                // ),
 
                 space40(),
               ],

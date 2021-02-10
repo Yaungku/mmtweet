@@ -17,17 +17,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  // String publickey = StorageManager.localStorage.getItem(mpublicKey);
-  // String name = StorageManager.localStorage.getItem(mname);
-  // String email = StorageManager.localStorage.getItem(memail);
-  // String phno = StorageManager.localStorage.getItem(mphone);
-  // String nrc = StorageManager.localStorage.getItem(mnrc);
+  String publickey = StorageManager.localStorage.getItem(mpublicKey);
+  String name = StorageManager.localStorage.getItem(mname);
+  String email = StorageManager.localStorage.getItem(memail);
+  String phno = StorageManager.localStorage.getItem(mphone);
+  String nrc = StorageManager.localStorage.getItem(mnrc);
   double verticalpadding = 5;
-  String publickey = "111";
-  String name = "Namwe";
-  String email = "mail";
-  String phno = "Phone";
-  String nrc = "hjwhjhw";
+  // String publickey = "111";
+  // String name = "Namwe";
+  // String email = "mail";
+  // String phno = "Phone";
+  // String nrc = "hjwhjhw";
 
   String info;
 
@@ -125,8 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    getAccountDetails(
-        "GBQ6KZVFJYWP2NLTGOKWZRQ7AFQI6B4AUXP5GLZ6QNEM4UBT6633KCPN");
+    getAccountDetails(testacc);
   }
 
   Future<void> createTrustline(String asset, String limit) async {
