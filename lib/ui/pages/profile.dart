@@ -7,6 +7,7 @@ import 'package:mmtweet/ui/wigets/appbar.dart';
 import 'package:mmtweet/ui/wigets/space.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:stellar_flutter_sdk/stellar_flutter_sdk.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key}) : super(key: key);
@@ -124,14 +125,46 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    checkacc("GBQ6KZVFJYWP2NLTGOKWZRQ7AFQI6B4AUXP5GLZ6QNEM4UBT6633KCPN");
+    getAccountDetails(
+        "GBQ6KZVFJYWP2NLTGOKWZRQ7AFQI6B4AUXP5GLZ6QNEM4UBT6633KCPN");
   }
 
-  Future<void> checkacc(String accountid) async {
+  Future<void> createTrustline(String asset, String limit) async {
+    String userSecretSeed = StorageManager.localStorage.getItem(mprivateKey);
+    KeyPair trustorKeyPair = KeyPair.fromSecretSeed(userSecretSeed);
+    AccountResponse trustor =
+        await sdk.accounts.account(trustorKeyPair.accountId);
+    // KeyPair issuerKeypair = KeyPair.fromAccountId(agentAccountId);
+    Asset assetType = Asset.createNonNativeAsset(asset, issureAcc);
+
+    ChangeTrustOperationBuilder changeTrustOperation =
+        ChangeTrustOperationBuilder(assetType, limit);
+
+    Transaction transaction = new TransactionBuilder(trustor)
+        .addOperation(changeTrustOperation.build())
+        .build();
+    transaction.sign(trustorKeyPair, net);
+
     try {
-      await sdk.accounts.account(accountid);
-      setState(() {
-        accActivated = true;
+      await sdk.submitTransaction(transaction);
+      print("Success");
+    } catch (e) {
+      print("something went wrong. on creating trustline");
+    }
+  }
+
+  Future<void> getAccountDetails(String accountId) async {
+    try {
+      await sdk.accounts.account(accountId).then((account) async {
+        Balance native = account.balances[0];
+        if (native.assetIssuer == null) {
+          await createTrustline(iom, limit);
+          getAccountDetails(accountId);
+        } else {
+          setState(() {
+            accActivated = true;
+          });
+        }
       });
     } catch (e) {
       print(e);

@@ -24,6 +24,8 @@ String testacc = "GBQ6KZVFJYWP2NLTGOKWZRQ7AFQI6B4AUXP5GLZ6QNEM4UBT6633KCPN";
 String mainAcc = "";
 
 String issureAcc = "";
+String iom = '';
+String limit = '';
 
 double iconradius = 30;
 
