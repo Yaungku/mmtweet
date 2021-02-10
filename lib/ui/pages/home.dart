@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   void _initData() async {
     await Future.wait([
-      getdatawithAcc(),
+      getdata(),
     ], eagerError: true)
         .then((value) {
       setState(() {
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onLoading() async {
-    await getdatawithAcc();
+    await getdata();
     await Future.delayed(Duration(milliseconds: 1000));
     _refreshController.loadComplete();
   }
